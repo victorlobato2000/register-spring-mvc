@@ -22,4 +22,11 @@ public class ProfessorController {
         mv.addObject("professores", professores);
         return mv;
     }
+
+    @GetMapping("/professor/new")
+    public ModelAndView nnew(){
+        ModelAndView mv = new ModelAndView("professores/new");
+        mv.addObject("statusProfessor", StatusProfessor.values());
+        return mv;
+    }
 }
