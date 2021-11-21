@@ -25,10 +25,10 @@
                             <td class="col-1" scope="row" th:text="${professor.id}">1</td>
                             <td class="col-4" th:text="${professor.nome}">Victor Lobato</td>
                             <td class="col-2" th:text="${professor.salario}">R$ 5.0000</td>
-                            <td class="col-2" th:text="${professor.statusProfessor}">ATIVO</td>
-                            <td class="col-1"><a href="#">Detalhes</a></td>
-                            <td class="col-1"><a href="#">Editar</a></td>
-                            <td class="col-1"><a href="#">Deletar</a></td>
+                            <td class="col-2" th:text="${professor.statusProfessor.toString()}">ATIVO</td>
+                            <td class="col-1"><a th:href="@{/professores/{professorId}(professorId = ${professor.id})}">Detalhes</a></td>
+                            <td class="col-1"><a th:href="@{/professores/{professorId}/edit(professorId = ${professor.id})}">Editar</a></td>
+                            <td class="col-1"><a th:href="@{/professores/{professorId}/delete(professorId = ${professor.id})}">Deletar</a></td>
                         </tr>
                     </tbody>
                 </table>

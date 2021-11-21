@@ -6,16 +6,16 @@ import com.victorlobato.register.models.Professor;
 import com.victorlobato.register.repositories.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/professores")
@@ -48,9 +48,24 @@ public class ProfessorController {
         }else {
             Professor professor = professorRequest.toProfessor(); //transformando professorDTO em professorModel
             professorRepository.save(professor);
-            ModelAndView mv = new ModelAndView("redirect:/professores");
+            ModelAndView mv = new ModelAndView("redirect:/professores/"+ professor.getId());
             mv.addObject(professorRequest);
             return mv ;
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ModelAndView show(@PathVariable Long id){
+        Optional<Professor> optionalProfessor = professorRepository.findById(id);
+        if(optionalProfessor.isPresent()){
+
+            Professor professor = optionalProfessor.get();
+            ModelAndView mv = new ModelAndView("professores/show");
+            mv.addObject("professor", professor);
+
+            return mv;
+        }else {
+            return new ModelAndView("redirect:/professores");
         }
     }
 }
