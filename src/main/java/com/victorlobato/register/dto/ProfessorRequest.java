@@ -14,7 +14,7 @@ public class ProfessorRequest {
 
     @NotBlank
     @NotNull
-    private String nome;
+    private String nome; // NotBlank.professorRequest.nome
     @NotNull
     @DecimalMin("0.0")
     private BigDecimal salario;
