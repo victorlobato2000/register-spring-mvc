@@ -14,27 +14,27 @@
     <title>Lista de Professores</title>
 </head>
 <body>
-<div class="container">
+<div class="container" >
     <div class="row">
         <h1>Novo Professor</h1>
     </div>
     <div class="container">
         <div class="row">
-            <form action="/professores" method="POST">
+            <form action="#" th:action="@{/professores}" th:object="${professorRequest}" method="POST">
                 <div class="mb-3">
                     <label class="form-label">Nome</label>
-                    <input class="form-control" type="text" name="nome">
+                    <input class="form-control" type="text" th:field="*{nome}">
                     <div></div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Salário</label>
-                    <input class="form-control" type="text" name="salario">
+                    <input class="form-control" type="text"  th:field="*{salario}">
                     <div></div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Status</label>
-                    <select class="form-select" name="statusProfessor">
-                            <option th:each="status : ${statusProfessor}"
+                    <select class="form-select"  th:field="*{statusProfessor}">
+                            <option th:each="status : ${listaStatusProfessor}"
                                     th:value="${status}" th:text="${status}">
                             </option>
                     </select>

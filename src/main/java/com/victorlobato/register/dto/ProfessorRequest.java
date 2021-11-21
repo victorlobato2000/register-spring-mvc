@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Data
-public class ProfessorDto {
+public class ProfessorRequest {
 
     @NotBlank
     @NotNull
