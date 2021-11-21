@@ -4,12 +4,19 @@ import com.victorlobato.register.enums.StatusProfessor;
 import com.victorlobato.register.models.Professor;
 import lombok.Data;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Data
 public class ProfessorDto {
 
+    @NotBlank
+    @NotNull
     private String nome;
+    @NotNull
+    @DecimalMin("0.0")
     private BigDecimal salario;
     private StatusProfessor statusProfessor;
 

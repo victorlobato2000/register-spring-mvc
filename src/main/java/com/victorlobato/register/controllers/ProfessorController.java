@@ -7,9 +7,12 @@ import com.victorlobato.register.repositories.ProfessorRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -34,9 +37,13 @@ public class ProfessorController {
     }
 
     @PostMapping("/professores")
-    public String create(ProfessorDto professorDto){
-        Professor professor = professorDto.toProfessor(); //transformando professorDTO em professorModel
-        professorRepository.save(professor);
-        return "redirect:/professores";
+    public String create(@Valid ProfessorDto professorDto, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "redirect:/professor/new";
+        }else {
+            Professor professor = professorDto.toProfessor(); //transformando professorDTO em professorModel
+            professorRepository.save(professor);
+            return "redirect:/professores";
+        }
     }
 }
