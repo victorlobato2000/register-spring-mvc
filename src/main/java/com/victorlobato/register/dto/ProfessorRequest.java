@@ -28,4 +28,10 @@ public class ProfessorRequest {
 
         return professor;
     }
+
+    public void fromProfessor(Professor professor) {
+        this.nome = professor.getNome();
+        this.salario = professor.getSalario();
+        this.statusProfessor = professor.getStatusProfessor();
+    }
 }

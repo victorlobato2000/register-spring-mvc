@@ -68,4 +68,23 @@ public class ProfessorController {
             return new ModelAndView("redirect:/professores");
         }
     }
+
+    @GetMapping("/{id}/edit")
+    public ModelAndView edit(@PathVariable Long id, ProfessorRequest professorRequest){
+        Optional<Professor> professorOptional = professorRepository.findById(id);
+
+        if (professorOptional.isPresent()){
+
+            Professor professor = professorOptional.get();
+            professorRequest.fromProfessor(professor);
+            ModelAndView mv = new ModelAndView("professores/edit");
+            mv.addObject("professorId", professor.getId());
+            mv.addObject("listaStatusProfessor", StatusProfessor.values());
+            return mv;
+        }else {
+            return new ModelAndView("redirect:/professores");
+
+        }
+
+    }
 }
