@@ -1,11 +1,14 @@
 package com.victorlobato.register.controllers;
 
+import com.victorlobato.register.dto.ProfessorDto;
 import com.victorlobato.register.enums.StatusProfessor;
 import com.victorlobato.register.models.Professor;
 import com.victorlobato.register.repositories.ProfessorRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
@@ -28,5 +31,12 @@ public class ProfessorController {
         ModelAndView mv = new ModelAndView("professores/new");
         mv.addObject("statusProfessor", StatusProfessor.values());
         return mv;
+    }
+
+    @PostMapping("/professores")
+    public String create(ProfessorDto professorDto){
+        Professor professor = professorDto.toProfessor(); //transformando professorDTO em professorModel
+        professorRepository.save(professor);
+        return "redirect:/professores";
     }
 }
